@@ -7,7 +7,9 @@ const int kNumPresets = 1;
 enum EParams
 {
   kGain = 0,
-  kNumParams
+  kPhaseInvertChannel,
+
+  kNumParams,
 };
 
 using namespace iplug;
