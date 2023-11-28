@@ -319,6 +319,7 @@
     <ClInclude Include="..\..\..\IPlug\ISender.h" />
     <ClInclude Include="..\HaasWell.h" />
     <ClInclude Include="..\resources\resource.h" />
+    <ClInclude Include="..\Smoothers2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Dependencies\IPlug\RTAudio\include\asio.cpp" />

@@ -258,6 +258,7 @@
     <ClInclude Include="..\..\..\IPlug\ISender.h">
       <Filter>IPlug</Filter>
     </ClInclude>
+    <ClInclude Include="..\Smoothers2.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="resources">

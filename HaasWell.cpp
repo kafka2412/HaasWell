@@ -24,6 +24,8 @@ HaasWell::HaasWell(const InstanceInfo& info)
 
     // Add phase invert button (Left or Right)
     pGraphics->AttachControl(new IVRadioButtonControl(b.GetCentredInside(100).GetVShifted(-100).GetHShifted(100), kPhaseInvertChannel, {"Left", "Right"}, "InvertChannel"));
+    // Add delay knob (0-100ms)
+    //pGraphics->AttachControl(new IVKnobControl(b.GetCentredInside(100).GetVShifted(100).GetHShifted(100), kDelayKnob));
   };
 #endif
 }
@@ -34,16 +36,21 @@ void HaasWell::ProcessBlock(sample** inputs, sample** outputs, int nFrames)
   const double gain = GetParam(kGain)->Value() / 100.;
   const int nChans = NOutChansConnected();
   const int phaseInvertChannel = GetParam(kPhaseInvertChannel)->Int();
+
+  // Use smoothed gain
+  // Get the channel we want to phase invert
+  mGainSmoother.ProcessBlock(inputs, outputs, nChans, nFrames, gain, phaseInvertChannel);
   
-  for (int s = 0; s < nFrames; s++) {
-    for (int c = 0; c < nChans; c++) {
-      // If the channel is the one we want to invert, invert it
-      if (c == phaseInvertChannel) {
-        outputs[c][s] = inputs[c][s] * -gain;
-        continue;
-      }
-      outputs[c][s] = inputs[c][s] * gain;
-    }
-  }
+  //for (int s = 0; s < nFrames; s++) {
+  //  for (int c = 0; c < nChans; c++) {
+  //    // If the channel is the one we want to invert, invert it
+  //    //if (c == phaseInvertChannel) {
+  //    //  outputs[c][s] = inputs[c][s] * -gain;
+  //    //  continue;
+  //    //}
+  //    outputs[c][s] = inputs[c][s] * gain;
+  //  }
+  //}
 }
+
 #endif
